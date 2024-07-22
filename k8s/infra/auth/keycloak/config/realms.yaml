@@ -1,0 +1,12 @@
+apiVersion: realm.keycloak.crossplane.io/v1alpha1
+kind: Realm
+metadata:
+  name: homelab
+  annotations:
+    crossplane.io/external-name: homelab
+spec:
+  deletionPolicy: Orphan
+  forProvider:
+    realm: homelab
+  managementPolicies:
+    - Observe
