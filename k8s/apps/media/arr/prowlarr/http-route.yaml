@@ -5,7 +5,7 @@ metadata:
   namespace: arr
 spec:
   parentRefs:
-    - name: stonegarden
+    - name: internal
       namespace: gateway
   hostnames:
     - "prowlarr.stonegarden.dev"
@@ -15,5 +15,5 @@ spec:
             type: PathPrefix
             value: /
       backendRefs:
-        - name: prowlarr-web
+        - name: prowlarr
           port: 80

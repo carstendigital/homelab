@@ -2,19 +2,19 @@ terraform {
   required_providers {
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.31.0"
+      version = "2.33.0"
     }
     proxmox = {
       source  = "bpg/proxmox"
-      version = "0.61.1"
+      version = "0.66.3"
     }
     talos = {
       source  = "siderolabs/talos"
-      version = "0.5.0"
+      version = "0.6.1"
     }
     restapi = {
       source  = "Mastercard/restapi"
-      version = "1.19.1"
+      version = "1.20.0"
     }
   }
 }
@@ -42,12 +42,8 @@ provider "restapi" {
 }
 
 provider "kubernetes" {
-  host = module.talos.talos_kube_config.kubernetes_client_configuration.host
-  client_certificate = base64decode(module.talos.talos_kube_config.kubernetes_client_configuration.client_certificate)
-  client_key = base64decode(module.talos.talos_kube_config.kubernetes_client_configuration.client_key)
-  cluster_ca_certificate = base64decode(module.talos.talos_kube_config.kubernetes_client_configuration.ca_certificate)
-  #  ignore_labels = [
-  #    "app.kubernetes.io/.*",
-  #    "kustomize.toolkit.fluxcd.io/.*",
-  #  ]
+  host = module.talos.kube_config.kubernetes_client_configuration.host
+  client_certificate = base64decode(module.talos.kube_config.kubernetes_client_configuration.client_certificate)
+  client_key = base64decode(module.talos.kube_config.kubernetes_client_configuration.client_key)
+  cluster_ca_certificate = base64decode(module.talos.kube_config.kubernetes_client_configuration.ca_certificate)
 }

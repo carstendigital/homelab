@@ -19,8 +19,14 @@ override.tf.json
 *_override.tf
 *_override.tf.json
 
+**/.DS_Store
+**/*.tfplan
+
 *.qcow2
 *.raw
 
 *.cert
 *.key
+
+*.pem
+*.crt

@@ -30,7 +30,7 @@ spec:
           type: RuntimeDefault
       containers:
         - name: lidarr
-          image: ghcr.io/onedr0p/lidarr:2.4.3
+          image: ghcr.io/onedr0p/lidarr:2.4.3 # renovate: docker=ghcr.io/onedr0p/lidarr
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
@@ -42,6 +42,7 @@ spec:
           envFrom:
             - configMapRef:
                 name: common-env
+                optional: true
           volumeMounts:
             - name: lidarr-config
               mountPath: /config
@@ -64,5 +65,5 @@ spec:
           emptyDir: { }
         - name: data
           nfs:
-            server: 192.168.1.55
+            server: 192.168.1.117
             path: /mnt/pool-0/data

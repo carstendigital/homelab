@@ -9,8 +9,8 @@ k8sServiceHost: localhost
 k8sServicePort: 7445
 securityContext:
   capabilities:
-    ciliumAgent: [ CHOWN,KILL,NET_ADMIN,NET_RAW,IPC_LOCK,SYS_ADMIN,SYS_RESOURCE,DAC_OVERRIDE,FOWNER,SETGID,SETUID ]
-    cleanCiliumState: [ NET_ADMIN,SYS_ADMIN,SYS_RESOURCE ]
+    ciliumAgent: [ CHOWN, KILL, NET_ADMIN, NET_RAW, IPC_LOCK, SYS_ADMIN, SYS_RESOURCE, DAC_OVERRIDE, FOWNER, SETGID, SETUID ]
+    cleanCiliumState: [ NET_ADMIN, SYS_ADMIN, SYS_RESOURCE ]
 
 cgroup:
   autoMount:
@@ -57,8 +57,17 @@ externalIPs:
 
 enableCiliumEndpointSlice: true
 
+loadBalancer:
+  # https://docs.cilium.io/en/stable/network/kubernetes/kubeproxy-free/#maglev-consistent-hashing
+  algorithm: maglev
+
 gatewayAPI:
   enabled: true
+envoy:
+  securityContext:
+    capabilities:
+      keepCapNetBindService: true
+      envoy: [ NET_ADMIN, PERFMON, BPF ]
 
 hubble:
   enabled: true
@@ -70,15 +79,12 @@ hubble:
     rollOutPods: true
 
 ingressController:
-  enabled: true
+  enabled: false
   default: true
   loadbalancerMode: shared
   service:
     annotations:
       io.cilium/lb-ipam-ips: 192.168.1.223
-    # Random values so Argo CD doesn't complain about the service being out of sync
-    insecureNodePort: 32434
-    secureNodePort: 31247
 
 # mTLS
 authentication:

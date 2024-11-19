@@ -1,7 +1,8 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base"
+    "config:recommended",
+    ":rebaseStalePrs"
   ],
   "kustomize": {
     "fileMatch": [
@@ -23,6 +24,31 @@
     }
   ],
   "packageRules": [
+    {
+      "groupName": "Media containers",
+      "matchPackageNames": [
+        "ghcr.io/onedr0p/**",
+        "ghcr.io/jellyfin/**"
+      ]
+    },
+    {
+      "groupName": "Netbird",
+      "matchPackageNames": [
+        "docker.io/netbirdio/**"
+      ]
+    },
+    {
+      "groupName": "Intel Device Plugins",
+      "matchPackageNames": [
+        "/intel-device-plugins/"
+      ]
+    },
+    {
+      "groupName": "Cilium",
+      "matchPackageNames": [
+        "/cilium/"
+      ]
+    },
     {
       "matchManagers": [
         "terraform"
